@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WH_App;
 namespace DataManagement
 {
@@ -13,18 +14,15 @@ namespace DataManagement
                 Stockpile stockpile1 = new Stockpile();
                 Stockpile stockpile2 = new Stockpile();
                 Stockpile stockpile3 = new Stockpile();
-                Stockpile stockpile4 = new Stockpile();
-                Stockpile stockpile5 = new Stockpile();
+
 
                 Product product1 = new Product();
                 Product product2 = new Product();
                 Product product3 = new Product();
 
-                stockpile1.section_number = 1;
-                stockpile2.section_number = 2;
-                stockpile3.section_number = 3;
-                stockpile4.section_number = 4;
-                stockpile5.section_number = 5;
+                stockpile1.section_number = 2;
+                stockpile2.section_number = 3;
+                stockpile3.section_number = 1;
 
                 List<Product> list1 = new List<Product>();
                 List<Product> list2 = new List<Product>();
@@ -37,18 +35,17 @@ namespace DataManagement
                 stockpile1.products = list1;
                 stockpile2.products = list2;
                 stockpile3.products = list3;
-                stockpile4.products = list1;
-                stockpile5.products = list3;
-                db.Stockpiles.AddRange(new Stockpile[] {stockpile1,stockpile2,stockpile3,stockpile4,stockpile5});
+
+                db.Stockpiles.AddRange(new Stockpile[] { stockpile1, stockpile2, stockpile3});
                 Console.WriteLine("Added To DB, Saving Changes");
                 db.SaveChanges();
                 Console.WriteLine("Saved Changes, Complete");
             }
         }
 
-        public static void AddProductToList(int quantity,List<Product> list, Product product)
+        public static void AddProductToList(int quantity, List<Product> list, Product product)
         {
-            for (int i = 0; i < quantity; i++) 
+            for (int i = 0; i < quantity; i++)
             { list.Add(product); }
         }
     }
