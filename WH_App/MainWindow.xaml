@@ -12,7 +12,7 @@
         <TextBlock x:Name="tblkProducts" HorizontalAlignment="Left" Height="76" Margin="429,141,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="290"/>
         <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Height="50" Margin="105,298,0,0" VerticalAlignment="Top" Width="147"/>
         <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Center" Height="50" Margin="0,298,0,0" VerticalAlignment="Top" Width="148"/>
-        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="50" Margin="554,357,0,0" VerticalAlignment="Top" Width="147"/>
+        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="50" Margin="554,357,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click"/>
         <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="42" Margin="554,302,0,0" VerticalAlignment="Top" Width="147"/>
 
     </Grid>

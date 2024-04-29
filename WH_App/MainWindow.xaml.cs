@@ -69,5 +69,22 @@ namespace WH_App
                 }
             }
         }
+
+        private void BtnTransfer_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbxSections.SelectedItem != null)
+            {
+                Section selectedSection = lbxSections.SelectedItem as Section;
+                int newId = (int)cbxMoveTo.SelectedItem;
+
+                var stockpileQuery = from sp in db.Stockpiles
+                                where sp.section_id == selectedSection.id
+                                select sp;
+
+                Stockpile stockpile = stockpileQuery.FirstOrDefault();
+                stockpile.section_id = newId;
+                db.SaveChanges();
+            }
+        }
     }
 }
