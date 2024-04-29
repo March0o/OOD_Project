@@ -15,14 +15,18 @@ namespace DataManagement
                 Stockpile stockpile2 = new Stockpile();
                 Stockpile stockpile3 = new Stockpile();
 
-
                 Product product1 = new Product();
                 Product product2 = new Product();
                 Product product3 = new Product();
 
-                stockpile1.section_number = 2;
-                stockpile2.section_number = 3;
-                stockpile3.section_number = 1;
+                Section section1 = new Section();
+                Section section2 = new Section();
+                Section section3 = new Section();
+                Section section4 = new Section();
+
+                stockpile1.section_id = 1;
+                stockpile2.section_id = 2;
+                stockpile3.section_id = 3;
 
                 List<Product> list1 = new List<Product>();
                 List<Product> list2 = new List<Product>();
@@ -37,6 +41,7 @@ namespace DataManagement
                 stockpile3.products = list3;
 
                 db.Stockpiles.AddRange(new Stockpile[] { stockpile1, stockpile2, stockpile3});
+                db.Sections.AddRange(new Section[] { section1, section2, section3, section4 });
                 Console.WriteLine("Added To DB, Saving Changes");
                 db.SaveChanges();
                 Console.WriteLine("Saved Changes, Complete");
