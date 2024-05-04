@@ -47,8 +47,9 @@ namespace WH_App
             //  Get input Values
             int quantity = int.Parse(tbxProductQty.Text);
             int productId = (int)cbxProductToAdd.SelectedValue;
+            DateTime dateTime = (DateTime)dpExpiryDate.SelectedDate;
             //  Create Product & add to list
-            ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = quantity };
+            ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = quantity, expiry_date = dateTime };
             productsList.Add(product);
             RefreshList();
         }

@@ -20,10 +20,10 @@ namespace DataManagement
                 ProductInfo product2 = new ProductInfo() { id = 2, name = "Second Product", description = "Second Product is an innovative wearable device designed to enhance health and wellness. Featuring cutting-edge sensors and intelligent algorithms, Second Product accurately tracks various health metrics such as heart rate, sleep patterns, and physical activity levels. Its lightweight and ergonomic design ensure comfort during all-day wear. Second Product seamlessly integrates with a dedicated mobile app, providing personalized insights and actionable recommendations to help users achieve their fitness goals. With Second Product, prioritize your well-being and stay motivated on your journey to a healthier lifestyle." };
                 ProductInfo product3 = new ProductInfo() { id = 3, name = "Third Product", description = "Third Product revolutionizes home entertainment with its immersive features and stunning visuals. This state-of-the-art multimedia system delivers crystal-clear audio and vibrant 4K resolution, bringing your favorite movies, games, and TV shows to life like never before. With an intuitive interface and seamless connectivity options, Third Product ensures effortless access to a vast library of content from various streaming platforms. Its sleek design and customizable settings cater to the preferences of every user, whether you're a casual viewer or a dedicated cinephile. Elevate your home entertainment experience with Third Product and enjoy endless hours of entertainment in the comfort of your own space." };
                 //  Create product quantities
-                ProductQuantity productQTY1 = new ProductQuantity() { product_id = 1, quantity = 50, owning_stockpile = 1 };
-                ProductQuantity productQTY2 = new ProductQuantity() { product_id = 2, quantity = 90, owning_stockpile = 3 };
-                ProductQuantity productQTY3 = new ProductQuantity() { product_id = 3, quantity = 40, owning_stockpile = 2 };
-                ProductQuantity productQTY4 = new ProductQuantity() { product_id = 1, quantity = 160, owning_stockpile = 1 };
+                ProductQuantity productQTY1 = new ProductQuantity() { product_id = 1, quantity = 50, expiry_date = new DateTime(2024,3, 2), owning_stockpile = 1 };
+                ProductQuantity productQTY2 = new ProductQuantity() { product_id = 2, quantity = 90, expiry_date = new DateTime(2024, 6, 10), owning_stockpile = 3 };
+                ProductQuantity productQTY3 = new ProductQuantity() { product_id = 3, quantity = 40, expiry_date = new DateTime(2024, 1, 10), owning_stockpile = 2 };
+                ProductQuantity productQTY4 = new ProductQuantity() { product_id = 1, quantity = 160, expiry_date = new DateTime(2024, 12, 1), owning_stockpile = 1 };
                 //  Create sections
                 Section section1 = new Section();
                 Section section2 = new Section();

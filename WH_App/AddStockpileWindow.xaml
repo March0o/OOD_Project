@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="AddStockpileWindow" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="246" Margin="400,64,0,0" VerticalAlignment="Top" Width="324" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <ComboBox x:Name="cbxProductToAdd" HorizontalAlignment="Left" Height="33" Margin="71,145,0,0" VerticalAlignment="Top" Width="154" SelectedValuePath="id"/>
-        <TextBox x:Name="tbxProductQty" HorizontalAlignment="Left" Height="33" Margin="230,145,0,0" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Top" Width="57" GotFocus="tbxProductQty_GotFocus"/>
-        <Button x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Left" Height="33" Margin="292,145,0,0" VerticalAlignment="Top" Width="59" Click="btnProductAdd_Click"/>
-        <Button x:Name="btnRemoveProduct" Content="Remove" HorizontalAlignment="Left" Height="28" Margin="71,190,0,0" VerticalAlignment="Top" Width="280" Click="btnRemoveProduct_Click"/>
-        <Button x:Name="btnAddStockpile" Content="Add Stockpile" HorizontalAlignment="Left" Height="34" Margin="400,328,0,0" VerticalAlignment="Top" Width="324" Click="btnAddStockpile_Click"/>
+        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="246" Margin="437,66,0,0" VerticalAlignment="Top" Width="324" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <ComboBox x:Name="cbxProductToAdd" HorizontalAlignment="Left" Height="33" Margin="44,145,0,0" VerticalAlignment="Top" Width="100" SelectedValuePath="id"/>
+        <TextBox x:Name="tbxProductQty" HorizontalAlignment="Left" Height="33" Margin="149,145,0,0" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Top" Width="57" GotFocus="tbxProductQty_GotFocus"/>
+        <Button x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Left" Height="33" Margin="336,145,0,0" VerticalAlignment="Top" Width="59" Click="btnProductAdd_Click"/>
+        <Button x:Name="btnRemoveProduct" Content="Remove" HorizontalAlignment="Left" Height="28" Margin="44,190,0,0" VerticalAlignment="Top" Width="351" Click="btnRemoveProduct_Click"/>
+        <Button x:Name="btnAddStockpile" Content="Add Stockpile" HorizontalAlignment="Left" Height="34" Margin="437,330,0,0" VerticalAlignment="Top" Width="324" Click="btnAddStockpile_Click"/>
+        <DatePicker x:Name="dpExpiryDate" HorizontalAlignment="Left" Height="33" Margin="211,145,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

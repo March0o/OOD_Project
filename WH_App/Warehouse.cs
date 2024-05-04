@@ -48,11 +48,26 @@ namespace WH_App
         public int id { get; set; }
         public int product_id { get; set; }
         public int quantity { get; set; }
+        public DateTime expiry_date { get; set; }
+        bool is_expired
+        {
+            get
+            {
+                if (expiry_date < DateTime.Now)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
         public int owning_stockpile { get; set; }
 
         public override string ToString()
         {
-            return "ID: " + product_id + "\tQTY: " + quantity;
+            return "ID: " + product_id + "\tQTY: " + quantity + "\t\tExpiry Date: " + expiry_date + "\tExpired: " + is_expired;
         }
     }
 
