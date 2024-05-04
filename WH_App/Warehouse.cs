@@ -19,6 +19,17 @@ namespace WH_App
         public Stockpile() { 
             products = new List<Product>();
         }
+
+        public string ListProducts()
+        {
+            string list = "";
+            for (int i = 0; i < products.Count; i++)
+            {
+                Product product = products[i];
+                list += product.name;
+            }
+            return list;
+        }
     }
 
     public class Product
@@ -38,5 +49,7 @@ namespace WH_App
         public WarehouseData(string dbName) : base(dbName) { }
         public DbSet<Stockpile> Stockpiles { get; set; }
         public DbSet<Section> Sections { get; set; }
+
+        public DbSet<Product> Products { get; set; }
     }
 }

@@ -15,9 +15,9 @@ namespace DataManagement
                 Stockpile stockpile2 = new Stockpile();
                 Stockpile stockpile3 = new Stockpile();
 
-                Product product1 = new Product();
-                Product product2 = new Product();
-                Product product3 = new Product();
+                Product product1 = new Product() { id = 1, name = "First Product"};
+                Product product2 = new Product() { id = 2, name = "First Product" };
+                Product product3 = new Product() { id = 3, name = "First Product" };
 
                 Section section1 = new Section();
                 Section section2 = new Section();
@@ -28,18 +28,15 @@ namespace DataManagement
                 stockpile2.section_id = 2;
                 stockpile3.section_id = 3;
 
-                List<Product> list1 = new List<Product>();
-                List<Product> list2 = new List<Product>();
-                List<Product> list3 = new List<Product>();
-
-                AddProductToList(80, list1, product3);
-                AddProductToList(50, list2, product1);
-                AddProductToList(60, list3, product3);
+                List<Product> list1 = AddProductToList(80, product3);
+                List<Product> list2 = AddProductToList(50, product1);
+                List<Product> list3 = AddProductToList(60, product2);
 
                 stockpile1.products = list1;
                 stockpile2.products = list2;
                 stockpile3.products = list3;
 
+                db.Products.AddRange(new Product[] { product1, product2, product3 });
                 db.Stockpiles.AddRange(new Stockpile[] { stockpile1, stockpile2, stockpile3});
                 db.Sections.AddRange(new Section[] { section1, section2, section3, section4 });
                 Console.WriteLine("Added To DB, Saving Changes");
@@ -48,10 +45,12 @@ namespace DataManagement
             }
         }
 
-        public static void AddProductToList(int quantity, List<Product> list, Product product)
+        public static List<Product> AddProductToList(int quantity, Product product)
         {
+            List<Product> list = new List<Product>();
             for (int i = 0; i < quantity; i++)
             { list.Add(product); }
+            return list;
         }
     }
 }
