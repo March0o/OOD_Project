@@ -40,27 +40,31 @@ namespace WH_App
             if (lbxSections.SelectedItem != null)
             {
                 Section selectedSection = lbxSections.SelectedItem as Section;
-                var query = from sp in db.Stockpiles
+                var stockpileQuery = from sp in db.Stockpiles
                             where sp.section_id == selectedSection.id
-                            select sp.id;
+                            select sp;
 
-                if (query.Count() == 0) // If No Stockpile
-                { tblkStockpileId.Text = "No Stockpile Assigned"; }
+
+                if (stockpileQuery.Count() == 0) // If No Stockpile
+                { tblkStockpileId.Text = "No Stockpile Assigned"; lbxProducts.ItemsSource= new List<String>() { "N/A" }; }
                 else // If Stockpile Assigned
                 {
-                    var stockpileId = query.FirstOrDefault();
-                    tblkStockpileId.Text = stockpileId.ToString();
-                    var productQuery = from sp in db.Stockpiles
-                                       where sp.id == stockpileId
-                                       select sp.products;
+                    Stockpile currentStockpile = stockpileQuery.FirstOrDefault() as Stockpile;
+                    tblkStockpileId.Text = "Stockpile ID: " + $"{currentStockpile.id.ToString()}";
 
-                    if (productQuery.Count() == 0)
+                    var productQuery = from p in db.ProductQuantities
+                                       where p.owning_stockpile == currentStockpile.id
+                                       select p;
+
+                    List<ProductQuantity> productList = productQuery.ToList();
+
+                    if (productList.Count == 0)
                     {
-                        tblkProducts.Text = "No Products in Stockpile";
+                        lbxProducts.ItemsSource = new List<String>() {"No Products Found in List"};
                     }
                     else
                     {
-                        tblkProducts.Text = productQuery.ToList().ToString();
+                        lbxProducts.ItemsSource = productList;
                     }
                 }
             }                 
@@ -104,12 +108,17 @@ namespace WH_App
             {
                 Section selectedSection = lbxSections.SelectedItem as Section;
 
-                var query = from sp in db.Stockpiles
+                var stockpileQuery = from sp in db.Stockpiles
                             where sp.section_id == selectedSection.id
                             select sp;
+                Stockpile spToDelete = stockpileQuery.FirstOrDefault();
 
-                Stockpile spToDelete = query.FirstOrDefault();
+                var productsQuery = from p in db.ProductQuantities
+                                    where p.owning_stockpile == spToDelete.id
+                                    select p;
+
                 db.Stockpiles.Remove(spToDelete);
+                db.ProductQuantities.RemoveRange(productsQuery);
                 db.SaveChanges();
                 UpdateOccupiedSections();
             }

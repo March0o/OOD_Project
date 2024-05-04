@@ -14,10 +14,10 @@ namespace WH_App
         public int id { get; set; }
         public int section_id { get; set; }
 
-        public List<Product> products { get; set; }
+        public List<ProductQuantity> products { get; set; }
 
         public Stockpile() { 
-            products = new List<Product>();
+            products = new List<ProductQuantity>();
         }
 
         public string ListProducts()
@@ -25,17 +25,24 @@ namespace WH_App
             string list = "";
             for (int i = 0; i < products.Count; i++)
             {
-                Product product = products[i];
-                list += product.name;
+                ProductQuantity product = products[i];
+                list += $"{product.quantity}";
             }
             return list;
         }
     }
 
-    public class Product
+    public class ProductQuantity
     {
         public int id { get; set; }
-        public string name { get; set; }
+        public int product_id { get; set; }
+        public int quantity { get; set; }
+        public int owning_stockpile { get; set; }
+
+        public override string ToString()
+        {
+            return "ID: " + id + "\tQTY: " + quantity;
+        }
     }
 
     public class Section
@@ -50,6 +57,6 @@ namespace WH_App
         public DbSet<Stockpile> Stockpiles { get; set; }
         public DbSet<Section> Sections { get; set; }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductQuantity> ProductQuantities { get; set; }
     }
 }
