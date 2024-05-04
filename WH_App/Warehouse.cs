@@ -32,6 +32,13 @@ namespace WH_App
         }
     }
 
+    public class ProductInfo
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+    }
+
     public class ProductQuantity
     {
         public int id { get; set; }
@@ -41,7 +48,7 @@ namespace WH_App
 
         public override string ToString()
         {
-            return "ID: " + id + "\tQTY: " + quantity;
+            return "ID: " + product_id + "\tQTY: " + quantity;
         }
     }
 
@@ -58,5 +65,6 @@ namespace WH_App
         public DbSet<Section> Sections { get; set; }
 
         public DbSet<ProductQuantity> ProductQuantities { get; set; }
+        public DbSet<ProductInfo> ProductInfos { get; set; }
     }
 }

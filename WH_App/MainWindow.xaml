@@ -13,7 +13,7 @@
         <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Center" Height="50" Margin="0,298,0,0" VerticalAlignment="Top" Width="148" Click="BtnRemove_Click"/>
         <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="50" Margin="554,357,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click"/>
         <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="42" Margin="554,302,0,0" VerticalAlignment="Top" Width="147"/>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="79" Margin="429,138,0,0" VerticalAlignment="Top" Width="290" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="79" Margin="429,138,0,0" VerticalAlignment="Top" Width="290" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedValuePath="product_id" SelectionChanged="lbxProducts_SelectionChanged"/>
 
     </Grid>
 </Window>

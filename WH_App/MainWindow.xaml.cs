@@ -20,7 +20,7 @@ namespace WH_App
     /// </summary>
     public partial class MainWindow : Window
     {
-        WarehouseData db = new WarehouseData("WarehouseDB_v1");
+        WarehouseData db = new WarehouseData("WarehouseDB_v2");
         public MainWindow()
         {
             InitializeComponent();
@@ -144,6 +144,30 @@ namespace WH_App
                 else { emptySections.Add(id); }
             }
             cbxMoveTo.ItemsSource = emptySections;
+        }
+
+        private void lbxProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lbxProducts.SelectedValue != null)
+            {
+                int productId = (int)lbxProducts.SelectedValue;
+
+                var productQuery = from pi in db.ProductInfos
+                                   where pi.id == productId
+                                   select pi;
+
+                if (productQuery.ToList().Count() == 0)
+                {
+                    MessageBox.Show("Product Doesn't Exist!");
+                }
+                else
+                {
+                    ProductInfo product = productQuery.FirstOrDefault() as ProductInfo;
+
+                    ProductInfoWindow infoWindow = new ProductInfoWindow(product, db);
+                    infoWindow.Show();
+                }
+            }
         }
     }
 }
