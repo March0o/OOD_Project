@@ -25,6 +25,7 @@ namespace WH_App
         {
             InitializeComponent();
 
+            // Get Sections
             var SectionQuery = from s in db.Sections
                                select s;
 
@@ -39,6 +40,7 @@ namespace WH_App
         {
             if (lbxSections.SelectedItem != null)
             {
+                //  Get Section Stockpile info
                 Section selectedSection = lbxSections.SelectedItem as Section;
                 var stockpileQuery = from sp in db.Stockpiles
                             where sp.section_id == selectedSection.id
@@ -49,15 +51,18 @@ namespace WH_App
                 { tblkStockpileId.Text = "No Stockpile Assigned"; lbxProducts.ItemsSource= new List<String>() { "N/A" }; }
                 else // If Stockpile Assigned
                 {
+                    //  Assign textblock info
                     Stockpile currentStockpile = stockpileQuery.FirstOrDefault() as Stockpile;
                     tblkStockpileId.Text = "Stockpile ID: " + $"{currentStockpile.id.ToString()}";
 
+                    //  Get Products that are located in stockpile
                     var productQuery = from p in db.ProductQuantities
                                        where p.owning_stockpile == currentStockpile.id
                                        select p;
 
                     List<ProductQuantity> productList = productQuery.ToList();
 
+                    //  Assign listbox info
                     if (productList.Count == 0)
                     {
                         lbxProducts.ItemsSource = new List<String>() {"No Products Found in List"};
@@ -74,13 +79,16 @@ namespace WH_App
         {
             if (lbxSections.SelectedItem != null)
             {
+                //  Get internal values
                 Section selectedSection = lbxSections.SelectedItem as Section;
                 int newId = (int)cbxMoveTo.SelectedItem;
 
+                //  get current stockpile
                 var stockpileQuery = from sp in db.Stockpiles
                                 where sp.section_id == selectedSection.id
                                 select sp;
 
+                //  assign stockpile to new section
                 Stockpile stockpile = stockpileQuery.FirstOrDefault();
                 stockpile.section_id = newId;
                 db.SaveChanges();
@@ -91,17 +99,16 @@ namespace WH_App
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            //  Get section id's of sections with stockpiles
             var OccupiedQuery = from sp in db.Stockpiles
                                 select sp.section_id;
-
             var OccupiedList = OccupiedQuery.ToList();
-
+            //  Get section id's of all sections
             var SectionIdQuery = from s in db.Sections
                                  select s.id;
-
             var SectionIdList = SectionIdQuery.ToList();
+            //  Add to list if id not in occupied list
             List<int> emptySections = new List<int>();
-
             foreach (var id in SectionIdList)
             {
                 if (OccupiedList.Contains(id))
@@ -111,6 +118,7 @@ namespace WH_App
 
             if (lbxSections.SelectedItem != null)
             {
+                //  make sure id used is in empty section
                 Section selectedSection = lbxSections.SelectedItem as Section;
                 if (emptySections.Contains(selectedSection.id))
                 {
@@ -135,16 +143,16 @@ namespace WH_App
             if (lbxSections.SelectedItem != null)
             {
                 Section selectedSection = lbxSections.SelectedItem as Section;
-
+                //  Get stockpile to delete
                 var stockpileQuery = from sp in db.Stockpiles
                             where sp.section_id == selectedSection.id
                             select sp;
                 Stockpile spToDelete = stockpileQuery.FirstOrDefault();
-
+                //  Get products to delete
                 var productsQuery = from p in db.ProductQuantities
                                     where p.owning_stockpile == spToDelete.id
                                     select p;
-
+                //  Start changes on database
                 db.Stockpiles.Remove(spToDelete);
                 db.ProductQuantities.RemoveRange(productsQuery);
                 db.SaveChanges();
@@ -156,15 +164,11 @@ namespace WH_App
         {
             var OccupiedQuery = from sp in db.Stockpiles
                                 select sp.section_id;
-
             var OccupiedList = OccupiedQuery.ToList();
-
             var SectionIdQuery = from s in db.Sections
                                  select s.id;
-
             var SectionIdList = SectionIdQuery.ToList();
             List<int> emptySections = new List<int>();
-
             foreach (var id in SectionIdList)
             {
                 if (OccupiedList.Contains(id))
@@ -178,8 +182,8 @@ namespace WH_App
         {
             if (lbxProducts.SelectedValue != null)
             {
+                //  Get selected product
                 int productId = (int)lbxProducts.SelectedValue;
-
                 var productQuery = from pi in db.ProductInfos
                                    where pi.id == productId
                                    select pi;
@@ -190,8 +194,8 @@ namespace WH_App
                 }
                 else
                 {
+                    //  pass product to new window
                     ProductInfo product = productQuery.FirstOrDefault() as ProductInfo;
-
                     ProductInfoWindow infoWindow = new ProductInfoWindow(product, db);
                     infoWindow.Show();
                 }

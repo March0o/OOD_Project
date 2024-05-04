@@ -28,12 +28,15 @@ namespace WH_App
         {
             InitializeComponent();
 
+            //  Assign program-wide variables
             this.sectionId = sectionId;
             this.db = data;
 
+            //  Get Products
             var productQuery = from pi in db.ProductInfos
                                select pi;
 
+            //  Assign to product combobox
             List<ProductInfo> productList = productQuery.ToList();
             cbxProductToAdd.ItemsSource = null;
             cbxProductToAdd.ItemsSource = productList;
@@ -41,9 +44,10 @@ namespace WH_App
 
         private void btnProductAdd_Click(object sender, RoutedEventArgs e)
         {
+            //  Get input Values
             int quantity = int.Parse(tbxProductQty.Text);
             int productId = (int)cbxProductToAdd.SelectedValue;
-
+            //  Create Product & add to list
             ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = quantity };
             productsList.Add(product);
             RefreshList();
@@ -71,28 +75,35 @@ namespace WH_App
 
         private void btnAddStockpile_Click(object sender, RoutedEventArgs e)
         {
-            // Create a placeholder record with minimal data to reserve an ID
+            // Insert placeholder object for id
             Stockpile placeholderStockpile = new Stockpile();
             db.Stockpiles.AddOrUpdate(placeholderStockpile);
             db.SaveChanges();
-
-            // Retrieve the ID of the reserved placeholder record
             int newId = placeholderStockpile.id;
 
+            //  Assign Id to product list items
             foreach (ProductQuantity product in productsList)
             {
                 product.owning_stockpile = newId;
             }
-
+            //  Create full Stockpile
             Stockpile updatedStockpile = new Stockpile() {id = newId, section_id = sectionId};
             updatedStockpile.products = productsList;
+
+            //  Update Database
             db.Stockpiles.AddOrUpdate(updatedStockpile);
             db.ProductQuantities.AddRange(productsList);
             db.SaveChanges();
 
+            //  Close Current Window & Open new one
             MainWindow window = new MainWindow();
             this.Close();
             window.Show();
+        }
+
+        private void tbxProductQty_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxProductQty.Text = "";
         }
     }
 }
