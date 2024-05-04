@@ -91,14 +91,42 @@ namespace WH_App
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            var OccupiedQuery = from sp in db.Stockpiles
+                                select sp.section_id;
+
+            var OccupiedList = OccupiedQuery.ToList();
+
+            var SectionIdQuery = from s in db.Sections
+                                 select s.id;
+
+            var SectionIdList = SectionIdQuery.ToList();
+            List<int> emptySections = new List<int>();
+
+            foreach (var id in SectionIdList)
+            {
+                if (OccupiedList.Contains(id))
+                { }
+                else { emptySections.Add(id); }
+            }
+
             if (lbxSections.SelectedItem != null)
             {
                 Section selectedSection = lbxSections.SelectedItem as Section;
-                Stockpile newStockpile = new Stockpile();
-                newStockpile.section_id = selectedSection.id;
-                db.Stockpiles.Add(newStockpile);
-                db.SaveChanges();
-                UpdateOccupiedSections();
+                if (emptySections.Contains(selectedSection.id))
+                {
+                    AddStockpileWindow window = new AddStockpileWindow(selectedSection.id, db);
+                    this.Close();
+                    window.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Section is not Empty");
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("No Section Selected");
             }
         }
 

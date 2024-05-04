@@ -65,10 +65,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddStockpileWindow.xaml.cs">
+      <DependentUpon>AddStockpileWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductInfoWindow.xaml.cs">
       <DependentUpon>ProductInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.cs" />
+    <Page Include="AddStockpileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
