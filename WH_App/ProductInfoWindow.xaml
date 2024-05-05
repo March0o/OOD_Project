@@ -9,6 +9,7 @@
     <Grid>
         <TextBlock x:Name="tblkName" HorizontalAlignment="Center" Height="32" Margin="0,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="316" TextAlignment="Center"/>
         <TextBlock x:Name="tblkDescription" HorizontalAlignment="Center" Height="188" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="572" Margin="0,118,0,0"/>
+        <TextBlock x:Name="tblkQuantity" HorizontalAlignment="Left" Height="32" Margin="580,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="94"/>
 
     </Grid>
 </Window>

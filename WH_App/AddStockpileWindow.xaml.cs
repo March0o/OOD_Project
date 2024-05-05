@@ -21,16 +21,18 @@ namespace WH_App
     public partial class AddStockpileWindow : Window
     {
         int sectionId = 0;
+        int areaId = 0;
         WarehouseData db = null;
         List<ProductQuantity> productsList = new List<ProductQuantity>();
 
-        public AddStockpileWindow(int sectionId, WarehouseData data)
+        public AddStockpileWindow(int sectionId, WarehouseData data, int areaId)
         {
             InitializeComponent();
 
             //  Assign program-wide variables
             this.sectionId = sectionId;
             this.db = data;
+            this.areaId = areaId;
 
             //  Get Products
             var productQuery = from pi in db.ProductInfos
@@ -40,6 +42,7 @@ namespace WH_App
             List<ProductInfo> productList = productQuery.ToList();
             cbxProductToAdd.ItemsSource = null;
             cbxProductToAdd.ItemsSource = productList;
+            this.areaId = areaId;
         }
 
         private void btnProductAdd_Click(object sender, RoutedEventArgs e)
@@ -97,7 +100,7 @@ namespace WH_App
             db.SaveChanges();
 
             //  Close Current Window & Open new one
-            MainWindow window = new MainWindow();
+            AreaWindow window = new AreaWindow(db,areaId);
             this.Close();
             window.Show();
         }

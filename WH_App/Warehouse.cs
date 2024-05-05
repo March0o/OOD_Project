@@ -75,8 +75,19 @@ namespace WH_App
     {
         public int id { get; set; }
         public string name { get; set; }
+        public int area_id { get; set; }
     }
 
+    public class Area
+    {
+        public int id { get; set; }
+        public string name { set; get; }
+        public override string ToString()
+        {
+            return "Area ID: " + id + "\tName: " + name;
+        }
+
+    }
     public class WarehouseData : DbContext
     {
         public WarehouseData(string dbName) : base(dbName) { }
@@ -85,5 +96,6 @@ namespace WH_App
 
         public DbSet<ProductQuantity> ProductQuantities { get; set; }
         public DbSet<ProductInfo> ProductInfos { get; set; }
+        public DbSet<Area> Areas { get; set; }
     }
 }

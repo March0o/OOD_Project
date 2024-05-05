@@ -68,11 +68,18 @@
     <Compile Include="AddStockpileWindow.xaml.cs">
       <DependentUpon>AddStockpileWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AreaWindow.xaml.cs">
+      <DependentUpon>AreaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProductInfoWindow.xaml.cs">
       <DependentUpon>ProductInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Warehouse.cs" />
     <Page Include="AddStockpileWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AreaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

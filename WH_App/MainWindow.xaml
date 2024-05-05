@@ -7,13 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListBox x:Name="lbxSections" HorizontalAlignment="Left" Height="158" Margin="30,59,0,0" VerticalAlignment="Top" Width="218" d:ItemsSource="{d:SampleData ItemCount=5}" DisplayMemberPath="id" SelectionChanged="lbxSections_SelectionChanged"/>
-        <TextBlock x:Name="tblkStockpileId" HorizontalAlignment="Left" Height="65" Margin="253,59,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="290"/>
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Height="50" Margin="105,298,0,0" VerticalAlignment="Top" Width="147" Click="BtnAdd_Click"/>
-        <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Center" Height="50" Margin="0,298,0,0" VerticalAlignment="Top" Width="148" Click="BtnRemove_Click"/>
-        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="50" Margin="554,349,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click"/>
-        <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="42" Margin="554,302,0,0" VerticalAlignment="Top" Width="147"/>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="79" Margin="253,138,0,0" VerticalAlignment="Top" Width="518" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedValuePath="product_id" SelectionChanged="lbxProducts_SelectionChanged"/>
-
+        <ListBox x:Name="lbxAreas" HorizontalAlignment="Left" Height="231" Margin="54,96,0,0" VerticalAlignment="Top" Width="322" SelectionChanged="lbxAreas_SelectionChanged"/>
+        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="177" Margin="400,150,0,0" VerticalAlignment="Top" Width="351" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lbxProducts_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Height="31" Margin="133,60,0,0" TextWrapping="Wrap" Text="Areas" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Left" Height="31" Margin="496,60,0,0" TextWrapping="Wrap" Text="Products" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
+        <ComboBox x:Name="cbxSearch" HorizontalAlignment="Left" Height="35" Margin="400,96,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBox x:Name="tbxSearch" HorizontalAlignment="Left" Height="35" Margin="465,96,0,0" TextWrapping="Wrap" Text="Search here" VerticalAlignment="Top" Width="286" FontSize="18" TextChanged="tbxSearch_TextChanged"/>
     </Grid>
 </Window>

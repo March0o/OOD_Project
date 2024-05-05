@@ -30,6 +30,12 @@ namespace WH_App
 
             tblkName.Text = $"{displayedProduct.name} [{displayedProduct.id}]";
             tblkDescription.Text = displayedProduct.description;
+
+            var quantityQuery = from p in db.ProductQuantities
+                                where p.product_id == displayedProduct.id
+                                select p.quantity;
+            int quantity = quantityQuery.ToList().Sum();
+            tblkQuantity.Text = "Total: " + $"{quantity}";
         }
     }
 }

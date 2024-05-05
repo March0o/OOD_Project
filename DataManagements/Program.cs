@@ -7,7 +7,7 @@ namespace DataManagement
     {
         static void Main(string[] args)
         {
-            WarehouseData db = new WarehouseData("WarehouseDB_v2");
+            WarehouseData db = new WarehouseData("WarehouseDB_v3");
 
             using (db)
             {
@@ -25,10 +25,13 @@ namespace DataManagement
                 ProductQuantity productQTY3 = new ProductQuantity() { product_id = 3, quantity = 40, expiry_date = new DateTime(2024, 1, 10), owning_stockpile = 2 };
                 ProductQuantity productQTY4 = new ProductQuantity() { product_id = 1, quantity = 160, expiry_date = new DateTime(2024, 12, 1), owning_stockpile = 1 };
                 //  Create sections
-                Section section1 = new Section();
-                Section section2 = new Section();
-                Section section3 = new Section();
-                Section section4 = new Section();
+                Section section1 = new Section() { area_id = 1 };
+                Section section2 = new Section() { area_id = 1 };
+                Section section3 = new Section() { area_id = 2 };
+                Section section4 = new Section() { area_id = 2 };
+                //  Create Areas
+                Area area1 = new Area() { id = 1, name = "A" };
+                Area area2 = new Area() { id = 2, name = "B" };
                 //  Assign section id to stockpiles
                 stockpile1.section_id = 1;
                 stockpile2.section_id = 2;
@@ -38,6 +41,7 @@ namespace DataManagement
                 stockpile2.products = new List<ProductQuantity>() { productQTY3 };
                 stockpile3.products = new List<ProductQuantity>() { productQTY2 };
                 //  Add to database
+                db.Areas.AddRange(new Area[] { area1, area2 });
                 db.ProductInfos.AddRange(new ProductInfo[] { product1, product2, product3 });
                 db.ProductQuantities.AddRange(new ProductQuantity[] { productQTY1, productQTY2, productQTY3 });
                 db.Stockpiles.AddRange(new Stockpile[] { stockpile1, stockpile2, stockpile3});
