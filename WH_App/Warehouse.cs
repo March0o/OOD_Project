@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -37,6 +38,7 @@ namespace WH_App
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public string image { get; set; }
         public override string ToString()
         {
             return $"{name} [{id}]";

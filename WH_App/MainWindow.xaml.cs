@@ -42,6 +42,7 @@ namespace WH_App
             //  Populate cbx
             string[] searchOptions = { "ID", "Name" };
             cbxSearch.ItemsSource = searchOptions;
+            cbxSearch.SelectedIndex = 0;
         }
 
         private void lbxAreas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,8 +74,8 @@ namespace WH_App
             if ((string)cbxSearch.SelectedValue == "ID")
             {
                 var idQuery = from p in db.ProductInfos
-                               where input.Contains(p.id.ToString())
-                               select p;
+                              where p.id.ToString().Contains(input)
+                              select p;
                 lbxProducts.ItemsSource = idQuery.ToList();
             }
             else if ((string)cbxSearch.SelectedValue == "Name")
@@ -85,6 +86,11 @@ namespace WH_App
                 lbxProducts.ItemsSource = nameQuery.ToList();
             }
                            
+        }
+
+        private void tbxSearch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            tbxSearch.Text = "";
         }
     }
 }

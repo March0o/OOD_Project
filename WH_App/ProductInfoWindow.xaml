@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="ProductInfoWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="tblkName" HorizontalAlignment="Center" Height="32" Margin="0,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="316" TextAlignment="Center"/>
-        <TextBlock x:Name="tblkDescription" HorizontalAlignment="Center" Height="188" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="572" Margin="0,118,0,0"/>
-        <TextBlock x:Name="tblkQuantity" HorizontalAlignment="Left" Height="32" Margin="580,41,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="94"/>
+        <TextBlock x:Name="tblkName" HorizontalAlignment="Left" Height="32" Margin="96,57,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
+        <TextBlock x:Name="tblkDescription" HorizontalAlignment="Left" Height="280" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="306" Margin="435,97,0,0"/>
+        <Image x:Name="imgProduct" Margin="90,178,474,66"/>
+        <TextBlock x:Name="tblkId" HorizontalAlignment="Left" Height="32" Margin="96,97,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
+        <TextBlock x:Name="tblkQuantity" HorizontalAlignment="Left" Height="32" Margin="96,134,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
 
     </Grid>
 </Window>

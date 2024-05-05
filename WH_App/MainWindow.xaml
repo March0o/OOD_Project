@@ -6,12 +6,35 @@
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="ProductTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding image}" Width="50" Height="50" Margin="0,0,10,0"/>
+                <TextBlock VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="[{0}]       {1}">
+                            <Binding Path="id"/>
+                            <Binding Path="name"/>
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <ListBox x:Name="lbxAreas" HorizontalAlignment="Left" Height="231" Margin="54,96,0,0" VerticalAlignment="Top" Width="322" SelectionChanged="lbxAreas_SelectionChanged"/>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="177" Margin="400,150,0,0" VerticalAlignment="Top" Width="351" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lbxProducts_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Height="31" Margin="133,60,0,0" TextWrapping="Wrap" Text="Areas" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" Height="31" Margin="496,60,0,0" TextWrapping="Wrap" Text="Products" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
-        <ComboBox x:Name="cbxSearch" HorizontalAlignment="Left" Height="35" Margin="400,96,0,0" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="tbxSearch" HorizontalAlignment="Left" Height="35" Margin="465,96,0,0" TextWrapping="Wrap" Text="Search here" VerticalAlignment="Top" Width="286" FontSize="18" TextChanged="tbxSearch_TextChanged"/>
+        <ListBox x:Name="lbxAreas" HorizontalAlignment="Left" Height="301" Margin="52,80,0,0" VerticalAlignment="Top" Width="322" SelectionChanged="lbxAreas_SelectionChanged"/>
+        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="261" Margin="398,120,0,0" VerticalAlignment="Top" Width="351" SelectionChanged="lbxProducts_SelectionChanged" ItemTemplate="{StaticResource ProductTemplate}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="0,5"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <TextBlock HorizontalAlignment="Left" Height="31" Margin="131,44,0,0" TextWrapping="Wrap" Text="Areas" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Left" Height="31" Margin="494,44,0,0" TextWrapping="Wrap" Text="Products" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
+        <ComboBox x:Name="cbxSearch" HorizontalAlignment="Left" Height="35" Margin="398,80,0,0" VerticalAlignment="Top" Width="60"/>
+        <TextBox x:Name="tbxSearch" HorizontalAlignment="Left" Height="35" Margin="463,80,0,0" TextWrapping="Wrap" Text="Search here" VerticalAlignment="Top" Width="286" FontSize="18" TextChanged="tbxSearch_TextChanged" GotFocus="tbxSearch_GotFocus"/>
     </Grid>
 </Window>

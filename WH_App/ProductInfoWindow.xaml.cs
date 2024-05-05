@@ -28,7 +28,9 @@ namespace WH_App
             db = data;
             displayedProduct = product;
 
-            tblkName.Text = $"{displayedProduct.name} [{displayedProduct.id}]";
+            tblkName.Text = $"{displayedProduct.name}";
+            tblkId.Text = $"{displayedProduct.id}";
+            imgProduct.Source = new BitmapImage(new Uri(displayedProduct.image,UriKind.Relative));
             tblkDescription.Text = displayedProduct.description;
 
             var quantityQuery = from p in db.ProductQuantities
