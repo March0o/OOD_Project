@@ -51,7 +51,7 @@ namespace WH_App
         public int product_id { get; set; }
         public int quantity { get; set; }
         public DateTime expiry_date { get; set; }
-        bool is_expired
+        public bool is_expired
         {
             get
             {

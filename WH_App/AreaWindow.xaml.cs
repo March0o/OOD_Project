@@ -74,7 +74,7 @@ namespace WH_App
                     //  Assign listbox info
                     if (productList.Count == 0)
                     {
-                        lbxProducts.ItemsSource = new List<String>() { "No Products Found in List" };
+                        lbxProducts.ItemsSource = null;
                     }
                     else
                     {
