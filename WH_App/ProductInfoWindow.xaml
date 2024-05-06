@@ -5,13 +5,74 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
-        Title="ProductInfoWindow" Height="450" Width="800">
+        Title="ProductInfoWindow" Height="450" Width="800"
+        ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
+        Background="#1B1B1E"
+        >
+
+    <Window.Resources>
+        <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
+        <SolidColorBrush  x:Key="Color2" Color="#3A435E"/>
+        <SolidColorBrush  x:Key="Color3" Color="#455561"/>
+        <SolidColorBrush  x:Key="Color4" Color="#5C6672"/>
+        <SolidColorBrush  x:Key="Color5" Color="#6C657F"/>
+        <SolidColorBrush  x:Key="Color6" Color="#A9BCD0"/>
+        <SolidColorBrush  x:Key="Color7" Color="#D8DBE2"/>
+    </Window.Resources>    
+    
     <Grid>
-        <TextBlock x:Name="tblkName" HorizontalAlignment="Left" Height="32" Margin="96,57,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
-        <TextBlock x:Name="tblkDescription" HorizontalAlignment="Left" Height="280" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="306" Margin="435,97,0,0"/>
-        <Image x:Name="imgProduct" Margin="90,178,474,66"/>
-        <TextBlock x:Name="tblkId" HorizontalAlignment="Left" Height="32" Margin="96,97,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
-        <TextBlock x:Name="tblkQuantity" HorizontalAlignment="Left" Height="32" Margin="96,134,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="175"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color1}" Margin="200,10,200,10" CornerRadius="5">
+            <TextBlock x:Name="tblkName" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Product Name" VerticalAlignment="Center" FontSize="22" Foreground="{StaticResource Color6}"/>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color1}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+            <TextBlock Text="Product Information" Foreground="{StaticResource Color6}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="2" Background="{StaticResource Color2}" Margin="10,0,10,20" CornerRadius="0,0,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="{StaticResource Color3}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+                    <TextBlock Text="Product ID" Foreground="{StaticResource Color7}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                </Border>
+                <Border Grid.Row="1" Background="{StaticResource Color4}" Margin="10,0,10,10" CornerRadius="0,0,5,5">
+                    <TextBlock x:Name="tblkId" HorizontalAlignment="Center" TextWrapping="Wrap" Text="ID" VerticalAlignment="Center" Foreground="{StaticResource Color7}" FontSize="14"/>
+                </Border>
+                <Border Grid.Row="2" Background="{StaticResource Color3}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+                    <TextBlock Text="Total Quantity" Foreground="{StaticResource Color7}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                </Border>
+                <Border Grid.Row="3" Background="{StaticResource Color4}" Margin="10,0,10,10" CornerRadius="0,0,5,5">
+                    <TextBlock x:Name="tblkQuantity" Foreground="{StaticResource Color7}" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Center" FontSize="14"/>
+                </Border>
+                <Border Grid.Row="4" Padding="10">
+                    <Image x:Name="imgProduct" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                </Border>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource Color1}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+            <TextBlock Text="Product Description" Foreground="{StaticResource Color6}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
+        </Border>
+        <Border Grid.Column="2" Grid.Row="2" Background="{StaticResource Color2}" Margin="10,0,10,20" CornerRadius="0,0,5,5" Padding="10">
+            <Border Background="{StaticResource Color3}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="5">
+                <TextBlock x:Name="tblkDescription" Foreground="{StaticResource Color7}" HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Description will be here" VerticalAlignment="Top"/>
+            </Border>
+        </Border>
 
     </Grid>
 </Window>
