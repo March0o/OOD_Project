@@ -5,9 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Background="#1B1B1E"
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" FontFamily="Lucida Sans Unicode">
 
     <Window.Resources>
+        <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
+        <SolidColorBrush  x:Key="Color2" Color="#3A435E"/>
+        <SolidColorBrush  x:Key="Color3" Color="#455561"/>
+        <SolidColorBrush  x:Key="Color4" Color="#5C6672"/>
+        <SolidColorBrush  x:Key="Color5" Color="#6C657F"/>
+        <SolidColorBrush  x:Key="Color6" Color="#A9BCD0"/>
+        <SolidColorBrush  x:Key="Color7" Color="#D8DBE2"/>
+
+        <Style x:Key="productLbxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="{StaticResource Color1}"/>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+
+        <Style x:Key="areaLbxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="{StaticResource Color1}"/>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+        </Style>
+
+        <Style x:Key="tblkStyle" TargetType="TextBlock">
+            <Setter Property="Background" Value="{StaticResource Color1}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color6}"/>
+        </Style>
+
+        <Style x:Key="tbxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource Color3}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color7}"/>
+            <Setter Property="Padding" Value="5,0,0,0"/>
+        </Style>
+
         <DataTemplate x:Key="ProductTemplate">
             <StackPanel Orientation="Horizontal">
                 <Image Source="{Binding image}" Width="50" Height="50" Margin="0,0,10,0"/>
@@ -24,17 +54,90 @@
     </Window.Resources>
 
     <Grid>
-        <ListBox x:Name="lbxAreas" HorizontalAlignment="Left" Height="301" Margin="52,80,0,0" VerticalAlignment="Top" Width="322" SelectionChanged="lbxAreas_SelectionChanged"/>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="261" Margin="398,120,0,0" VerticalAlignment="Top" Width="351" SelectionChanged="lbxProducts_SelectionChanged" ItemTemplate="{StaticResource ProductTemplate}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Padding" Value="0,5"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-        </ListBox>
-        <TextBlock HorizontalAlignment="Left" Height="31" Margin="131,44,0,0" TextWrapping="Wrap" Text="Areas" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
-        <TextBlock HorizontalAlignment="Left" Height="31" Margin="494,44,0,0" TextWrapping="Wrap" Text="Products" VerticalAlignment="Top" Width="160" TextAlignment="Center" FontSize="20"/>
-        <ComboBox x:Name="cbxSearch" HorizontalAlignment="Left" Height="35" Margin="398,80,0,0" VerticalAlignment="Top" Width="60"/>
-        <TextBox x:Name="tbxSearch" HorizontalAlignment="Left" Height="35" Margin="463,80,0,0" TextWrapping="Wrap" Text="Search here" VerticalAlignment="Top" Width="286" FontSize="18" TextChanged="tbxSearch_TextChanged" GotFocus="tbxSearch_GotFocus"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border  Grid.Column="0" Grid.Row="0" CornerRadius="5,5,0,0" Background="{StaticResource Color1}" Margin="10,10,10,0">
+            <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Areas" VerticalAlignment="Stretch" Width="200" TextAlignment="Center" FontSize="20" Style="{StaticResource tblkStyle}"/>
+        </Border>
+        <Border  Grid.Column="1" Grid.Row="0" Background="{StaticResource Color1}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+            <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Products" VerticalAlignment="Stretch" Width="200" TextAlignment="Center" FontSize="20" Style="{StaticResource tblkStyle}"/>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" CornerRadius="0,0,5,5" Margin="10,0,10,10" Background="{StaticResource Color2}">
+            <Grid x:Name="lbxSearchGrid" Background="{StaticResource Color2}" Margin="0,0,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+                <ComboBox x:Name="cbxSearch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Margin="10,10,0,0"/>
+                <TextBox x:Name="tbxSearch" TextWrapping="Wrap" Text="Search here" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontSize="18" Margin="0,10,10,0" TextChanged="tbxSearch_TextChanged" GotFocus="tbxSearch_GotFocus" Grid.Column="1" Grid.Row="0" Grid.RowSpan="1" Style="{StaticResource tbxStyle}"/>
+            <ListBox x:Name="lbxProducts" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" SelectionChanged="lbxProducts_SelectionChanged" ItemTemplate="{StaticResource ProductTemplate}" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource productLbxStyle}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Foreground" Value="{StaticResource Color7}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border x:Name="Border"
+                                            Background="{StaticResource Color3}"
+                                            BorderThickness="3"
+                                            BorderBrush="{StaticResource Color2}"
+                                            Padding="0,5"
+                                            Margin="5,15,5,0"
+                                            >
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="{StaticResource Color4}"/>
+                                            </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            </Grid>
+         </Border>
+        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color2}" Margin="10,0,10,10" Padding="0,10,0,5" CornerRadius="0,0,5,5">
+            <ListBox x:Name="lbxAreas" HorizontalAlignment="Stretch" Margin="10,0,10,10" VerticalAlignment="Stretch" SelectionChanged="lbxAreas_SelectionChanged" Style="{StaticResource areaLbxStyle}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Foreground" Value="{StaticResource Color7}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Border x:Name="Border1"
+                                        Background="{StaticResource Color3}"
+                                            BorderThickness="1"
+                                            BorderBrush="{StaticResource Color2}"
+                                            Margin="0,2,0,2">
+                                        <ContentPresenter/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="Border1" Property="Background" Value="{StaticResource Color4}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Border>
+        
     </Grid>
 </Window>

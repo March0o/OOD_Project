@@ -5,20 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
-        Title="AreaWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox x:Name="lbxSections" HorizontalAlignment="Left" Height="158" Margin="34,122,0,0" VerticalAlignment="Top" Width="218" d:ItemsSource="{d:SampleData ItemCount=5}" DisplayMemberPath="id" SelectionChanged="lbxSections_SelectionChanged"/>
-        <TextBlock x:Name="tblkStockpileId" HorizontalAlignment="Left" Height="29" Margin="267,122,0,0" TextWrapping="Wrap" Text="Select a section to display info" VerticalAlignment="Top" Width="290" FontSize="16"/>
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Center" Height="40" Margin="0,304,0,0" VerticalAlignment="Top" Width="148" Click="BtnAdd_Click"/>
-        <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Center" Height="40
-                " Margin="0,349,0,0" VerticalAlignment="Top" Width="148" Click="BtnRemove_Click"/>
-        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="40" Margin="554,349,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click"/>
-        <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="40" Margin="554,304,0,0" VerticalAlignment="Top" Width="147"/>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="79" Margin="257,201,0,0" VerticalAlignment="Top" Width="518" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedValuePath="product_id" SelectionChanged="lbxProducts_SelectionChanged"/>
-        <TextBlock HorizontalAlignment="Left" Height="27" Margin="90,90,0,0" TextWrapping="Wrap" Text="Sections" VerticalAlignment="Top" Width="106" FontSize="18" TextAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Height="27" Margin="414,90,0,0" TextWrapping="Wrap" Text="Stockpile Information" VerticalAlignment="Top" Width="204" FontSize="18" TextAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Left" Height="27" Margin="414,169,0,0" TextWrapping="Wrap" Text="Products" VerticalAlignment="Top" Width="204" FontSize="16" TextAlignment="Center"/>
-        <TextBlock x:Name="tblkArea" HorizontalAlignment="Center" Height="44" Margin="0,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="318" FontSize="22" TextAlignment="Center"/>
+        Title="AreaWindow" Height="450" Width="800"
+         Background="#1B1B1E"
+         ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
+        >
+    <Window.Resources>
+        <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
+        <SolidColorBrush  x:Key="Color2" Color="#3A435E"/>
+        <SolidColorBrush  x:Key="Color3" Color="#455561"/>
+        <SolidColorBrush  x:Key="Color4" Color="#5C6672"/>
+        <SolidColorBrush  x:Key="Color5" Color="#6C657F"/>
+        <SolidColorBrush  x:Key="Color6" Color="#A9BCD0"/>
+        <SolidColorBrush  x:Key="Color7" Color="#D8DBE2"/>
+    </Window.Resources>
 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource Color1}" Margin="200,10,200,10" CornerRadius="5,5,5,5">
+            <TextBlock x:Name="tblkArea" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Area Title" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" Foreground="{StaticResource Color6}"/>
+        </Border>
+
+        <Border Grid.Column="0" Grid.Row="1" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="{StaticResource Color1}" CornerRadius="5,5,0,0">
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Sections" VerticalAlignment="Stretch" FontSize="18" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
+                </Border>
+                <Border Grid.Row="1" Background="{StaticResource Color2}" Padding="10" CornerRadius="0,0,5,5">
+                    <ListBox x:Name="lbxSections" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DisplayMemberPath="id" SelectionChanged="lbxSections_SelectionChanged" Grid.Row="1"/>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+
+                <Border Background="{StaticResource Color1}" Grid.Row="0" CornerRadius="5,5,0,0">
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Stockpile Information" VerticalAlignment="Top" FontSize="18" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
+                </Border>
+                <Border Grid.Row="1" Background="{StaticResource Color2}" CornerRadius="0,0,5,5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock x:Name="tblkStockpileId" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" Text="Select a section to display info" VerticalAlignment="Center" FontSize="16" Grid.Row="0" Foreground="{StaticResource Color7}"/>
+                        <Border Grid.Row="2" Padding="10">
+                            <ListBox x:Name="lbxProducts" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedValuePath="product_id" SelectionChanged="lbxProducts_SelectionChanged"/>
+                        </Border>
+                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Products" VerticalAlignment="Center" Width="204" FontSize="16" TextAlignment="Center" Grid.Row="1" Foreground="{StaticResource Color7}"/>
+                    </Grid>
+                </Border>
+               
+            </Grid>
+        </Border>
+        
+        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Height="40" Margin="94,89,0,0" VerticalAlignment="Top" Width="148" Click="BtnAdd_Click" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Left" Height="40
+                " Margin="94,134,0,0" VerticalAlignment="Top" Width="148" Click="BtnRemove_Click" Grid.Row="2" Grid.Column="1"/>
+        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="40" Margin="322,134,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click" Grid.Row="2" Grid.Column="1"/>
+        <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="40" Margin="322,89,0,0" VerticalAlignment="Top" Width="147" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>

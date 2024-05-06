@@ -39,9 +39,10 @@ namespace WH_App
             //  Populate lbxProducts
             lbxProducts.ItemsSource = null;
             lbxProducts.ItemsSource = productsList;
-            //  Populate cbx
-            string[] searchOptions = { "ID", "Name" };
-            cbxSearch.ItemsSource = searchOptions;
+            //  select cbx
+            string[] options = { "ID", "Name" };
+            cbxSearch.ItemsSource = null;
+            cbxSearch.ItemsSource = options;
             cbxSearch.SelectedIndex = 0;
         }
 
