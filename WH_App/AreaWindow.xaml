@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource Color1}" Margin="200,10,200,10" CornerRadius="5,5,5,5">
-            <TextBlock x:Name="tblkArea" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Area Title" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" Foreground="{StaticResource Color6}"/>
+            <TextBlock x:Name="tblkArea" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Area Title" VerticalAlignment="Center" FontSize="22" TextAlignment="Center" Foreground="{StaticResource Color6}"/>
         </Border>
 
         <Border Grid.Column="0" Grid.Row="1" Padding="10">
@@ -41,7 +41,7 @@
                     <RowDefinition Height="5*"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" Background="{StaticResource Color1}" CornerRadius="5,5,0,0">
-                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Sections" VerticalAlignment="Stretch" FontSize="18" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
+                    <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Sections" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
                 </Border>
                 <Border Grid.Row="1" Background="{StaticResource Color2}" Padding="10" CornerRadius="0,0,5,5">
                     <ListBox x:Name="lbxSections" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DisplayMemberPath="id" SelectionChanged="lbxSections_SelectionChanged" Grid.Row="1"/>
@@ -57,7 +57,7 @@
                 </Grid.RowDefinitions>
 
                 <Border Background="{StaticResource Color1}" Grid.Row="0" CornerRadius="5,5,0,0">
-                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Stockpile Information" VerticalAlignment="Top" FontSize="18" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Stockpile Information" VerticalAlignment="Center" FontSize="20" TextAlignment="Center" Grid.Row="0" Foreground="{StaticResource Color6}"/>
                 </Border>
                 <Border Grid.Row="1" Background="{StaticResource Color2}" CornerRadius="0,0,5,5">
                     <Grid>
@@ -70,22 +70,44 @@
                             <RowDefinition Height="4*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        
+
                         <TextBlock x:Name="tblkStockpileId" HorizontalAlignment="Stretch" TextWrapping="Wrap" TextAlignment="Center" Text="Select a section to display info" VerticalAlignment="Center" FontSize="16" Grid.Row="0" Foreground="{StaticResource Color7}"/>
                         <Border Grid.Row="2" Padding="10">
                             <ListBox x:Name="lbxProducts" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" SelectedValuePath="product_id" SelectionChanged="lbxProducts_SelectionChanged"/>
                         </Border>
-                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Products" VerticalAlignment="Center" Width="204" FontSize="16" TextAlignment="Center" Grid.Row="1" Foreground="{StaticResource Color7}"/>
+                        <Border  Grid.Row="1" Background="{StaticResource Color1}">
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Products" VerticalAlignment="Center" Width="204" FontSize="18" TextAlignment="Center" Foreground="{StaticResource Color7}"/>
+                        </Border>
+                        <Border Grid.Row="3" Padding="10" Margin="10" Background="{StaticResource Color3}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Border Grid.Column="0">
+                                    <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Click="BtnAdd_Click" />
+                                </Border>
+                                <Border Grid.Column="1">
+                                    <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="BtnRemove_Click" />
+                                </Border>
+                                <Border Grid.Column="2">
+                                    <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                </Border>
+                                <Border Grid.Column="3">
+                                    <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="BtnTransfer_Click"/>
+                                </Border>
+                            </Grid>
+                        </Border>
                     </Grid>
                 </Border>
-               
+
             </Grid>
         </Border>
-        
-        <Button x:Name="BtnAdd" Content="Add" HorizontalAlignment="Left" Height="40" Margin="94,89,0,0" VerticalAlignment="Top" Width="148" Click="BtnAdd_Click" Grid.Row="2" Grid.Column="1"/>
-        <Button x:Name="BtnRemove" Content="Remove" HorizontalAlignment="Left" Height="40
-                " Margin="94,134,0,0" VerticalAlignment="Top" Width="148" Click="BtnRemove_Click" Grid.Row="2" Grid.Column="1"/>
-        <Button x:Name="BtnTransfer" Content="Transfer" HorizontalAlignment="Left" Height="40" Margin="322,134,0,0" VerticalAlignment="Top" Width="147" Click="BtnTransfer_Click" Grid.Row="2" Grid.Column="1"/>
-        <ComboBox x:Name="cbxMoveTo" HorizontalAlignment="Left" Height="40" Margin="322,89,0,0" VerticalAlignment="Top" Width="147" Grid.Row="2" Grid.Column="1"/>
     </Grid>
 </Window>
