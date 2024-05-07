@@ -8,7 +8,8 @@
         Title="AddStockpileWindow" Height="450" Width="800"
         ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
         Background="#1B1B1E"
-        >
+        WindowStartupLocation="CenterScreen">
+
 
     <Window.Resources>
         <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
@@ -23,6 +24,13 @@
             <Setter Property="Background" Value="{StaticResource Color6}"/>
             <Setter Property="BorderThickness" Value="3"/>
             <Setter Property="BorderBrush" Value="{StaticResource Color4}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color2}"/>
+        </Style>
+        <Style x:Key="btnBackStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Color6}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Color4}"/>
+            <Setter Property="Foreground" Value="{StaticResource Color2}"/>
         </Style>
         <Style x:Key="lbxProductsStyle" TargetType="ListBox">
             <Setter Property="Background" Value="{StaticResource Color3}"/>
@@ -44,14 +52,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding product_id}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
-                <TextBlock Grid.Column="1" Text="{Binding quantity}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
-                <TextBlock Grid.Column="2" Text="{Binding expiry_date}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Column="0" Text="{Binding product_id}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10"/>
+                <TextBlock Grid.Column="1" Text="{Binding quantity}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="10"/>
+                <TextBlock Grid.Column="2" Text="{Binding expiry_date}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="9"/>
                 <Border  Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="3">
-                    <TextBlock Style="{StaticResource tblkExpiry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontSize="12"/>
+                    <TextBlock Style="{StaticResource tblkExpiry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontSize="10"/>
                 </Border>
             </Grid>
         </DataTemplate>
@@ -63,13 +71,19 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
-
-        <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Color1}" Margin="20,20,20,0" CornerRadius="5,5,0,0">
+        <Border Background="{StaticResource Color1}" Width="100" VerticalAlignment="Stretch" Margin="20,10,0,10" CornerRadius="5" HorizontalAlignment="Left">
+            <Button x:Name="btnReturn" Content="Return" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource btnBackStyle}" VerticalContentAlignment="Center" Margin="20,4,20,4" Click="btnReturn_Click" FontSize="9"/>
+        </Border>
+        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color1}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CornerRadius="5" Margin='200,10,200,10'>
+            <TextBlock Text="Stockpile Creation" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource Color6}" FontSize="22"/>
+        </Border>
+        <Border Grid.Row="1" Grid.Column="0" Background="{StaticResource Color1}" Margin="20,10,20,0" CornerRadius="5,5,0,0">
             <TextBlock Text="Stockpile Edits" Foreground="{StaticResource Color6}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
         </Border>
-        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color2}" Margin="20,0,20,20" CornerRadius="0,0,5,5" Padding="20">
+        <Border Grid.Column="0" Grid.Row="2" Background="{StaticResource Color2}" Margin="20,0,20,20" CornerRadius="0,0,5,5" Padding="20,0,20,20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -103,13 +117,23 @@
                 <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color4}" Margin="10,00,10,10" CornerRadius="0,0,5,5">
                     <TextBox x:Name="tbxProductQty" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Enter Quantity" VerticalAlignment="Center" GotFocus="tbxProductQty_GotFocus" Width="200"/>
                 </Border>
-                <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Click="btnProductAdd_Click" Style="{StaticResource btnStyle}"/>
+                <Border Background="{StaticResource Color3}" Grid.Row="6" Grid.ColumnSpan="2" Padding="10,6,10,6">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Grid.ColumnSpan="1" x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnProductAdd_Click" Style="{StaticResource btnStyle}"/>
+                        <Button Grid.Column="1" Grid.ColumnSpan="1" x:Name="btnProductRandom" Content="Random Add" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource btnStyle}" Click="btnProductRandom_Click"/>
+                    </Grid>
+                </Border>
+                
             </Grid>
         </Border>
-        <Border Grid.Column="1" Grid.Row="0" Background="{StaticResource Color1}" Margin="20,20,20,0" CornerRadius="5,5,0,0">
+        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource Color1}" Margin="20,10,20,0" CornerRadius="5,5,0,0">
             <TextBlock Text="Current Products" FontSize="18" Foreground="{StaticResource Color6}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource Color2}" CornerRadius="0,0,5,5" Margin="20,0,20,20" Padding="20">
+        <Border Grid.Column="1" Grid.Row="2" Background="{StaticResource Color2}" CornerRadius="0,0,5,5" Margin="20,0,20,20" Padding="20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -123,7 +147,7 @@
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Foreground" Value="{StaticResource Color7}"/>
-                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="FontSize" Value="14"/>
                             <Setter Property="HorizontalAlignment" Value="Stretch"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <Setter Property="Template">
@@ -139,6 +163,9 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border2" Property="Background" Value="{StaticResource Color6}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
                                                 <Setter TargetName="border2" Property="Background" Value="{StaticResource Color6}"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>

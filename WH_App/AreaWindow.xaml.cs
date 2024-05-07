@@ -252,5 +252,12 @@ namespace WH_App
             // Raise the SelectionChanged event with the new arguments
             lbxSections.RaiseEvent(args);
         }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            this.Close();
+            window.Show();
+        }
     }
 }

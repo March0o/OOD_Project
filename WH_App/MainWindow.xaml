@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
         Background="#1B1B1E"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" FontFamily="Lucida Sans Unicode">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
+        WindowStartupLocation="CenterScreen">
+
 
     <Window.Resources>
         <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
@@ -21,17 +23,14 @@
             <Setter Property="Background" Value="{StaticResource Color3}"/>
             <Setter Property="BorderThickness" Value="0"></Setter>
         </Style>
-
         <Style x:Key="areaLbxStyle" TargetType="ListBox">
             <Setter Property="Background" Value="{StaticResource Color3}"/>
             <Setter Property="BorderThickness" Value="0"></Setter>
         </Style>
-
         <Style x:Key="tblkStyle" TargetType="TextBlock">
             <Setter Property="Background" Value="{StaticResource Color1}"/>
             <Setter Property="Foreground" Value="{StaticResource Color6}"/>
         </Style>
-
         <Style x:Key="tbxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="{StaticResource Color3}"/>
             <Setter Property="Foreground" Value="{StaticResource Color7}"/>
@@ -40,7 +39,7 @@
 
         <DataTemplate x:Key="ProductTemplate">
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding image}" Width="50" Height="50" Margin="0,0,10,0"/>
+                <Image Source="{Binding image}" Width="50" Height="50" Margin="5,0,10,0"/>
                 <TextBlock VerticalAlignment="Center">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="[{0}]       {1}">
@@ -55,9 +54,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="80*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -70,7 +68,7 @@
         <Border  Grid.Column="1" Grid.Row="0" Background="{StaticResource Color1}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
             <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="Products" VerticalAlignment="Stretch" Width="200" TextAlignment="Center" FontSize="20" Style="{StaticResource tblkStyle}"/>
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" CornerRadius="0,0,5,5" Margin="10,0,10,10" Background="{StaticResource Color2}">
+        <Border Grid.Column="1" Grid.Row="1" CornerRadius="0,0,5,5" Margin="10,0,10,20" Background="{StaticResource Color2}">
             <Grid x:Name="lbxSearchGrid" Background="{StaticResource Color2}" Margin="0,0,0,5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -86,8 +84,9 @@
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Foreground" Value="{StaticResource Color7}"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
+                        <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <Border x:Name="Border"
                                             Background="{StaticResource Color4}"
@@ -111,11 +110,12 @@
             </ListBox>
             </Grid>
          </Border>
-        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color2}" Margin="10,0,10,10" Padding="0,10,0,5" CornerRadius="0,0,5,5">
+        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color2}" Margin="10,0,10,20" Padding="0,10,0,5" CornerRadius="0,0,5,5">
             <ListBox x:Name="lbxAreas" HorizontalAlignment="Stretch" Margin="10,0,10,10" VerticalAlignment="Stretch" SelectionChanged="lbxAreas_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}" Style="{StaticResource areaLbxStyle}">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Foreground" Value="{StaticResource Color7}"/>
+                        <Setter Property="FontSize" Value="18"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
@@ -138,6 +138,6 @@
                 </ListBox.ItemContainerStyle>
             </ListBox>
         </Border>
-        
+
     </Grid>
 </Window>

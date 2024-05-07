@@ -95,7 +95,7 @@ namespace WH_App
 
         private void btnAddStockpile_Click(object sender, RoutedEventArgs e)
         {
-            if (productsList.Count() == 0)
+            if (productsList.Count() != 0)
             {
                 // Insert placeholder object for id
                 Stockpile placeholderStockpile = new Stockpile();
@@ -131,6 +131,39 @@ namespace WH_App
         private void tbxProductQty_GotFocus(object sender, RoutedEventArgs e)
         {
             tbxProductQty.Text = "";
+        }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            AreaWindow window = new AreaWindow(db, areaId);
+            this.Close();
+            window.Show();
+        }
+
+        private void btnProductRandom_Click(object sender, RoutedEventArgs e)
+        {
+            //  Declare Random
+            Random rnd = new Random();
+
+            //  Get Random Values
+            //  ProductId
+            var productQuery = from pi in db.ProductInfos
+                               select pi.id;
+            List<int> productIdList = productQuery.ToList();
+            int randomProductIndex = rnd.Next(productIdList.Count - 1);
+            int productId = productIdList[randomProductIndex];
+            //  Quantity
+            int productQuantity = rnd.Next(1000);
+            //  Date
+            int year = rnd.Next(2000, 2100);
+            int month = rnd.Next(1, 12);
+            int maxDay = DateTime.DaysInMonth(year, month); // Make sure day is valid (eg on februrary) threw error
+            int day = rnd.Next(1, maxDay + 1);// Method is exclusive so +1 needed
+            DateTime date = new DateTime(year,month,day,0,0,0);
+            //  Add Product to list
+            ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = productQuantity, expiry_date = date};
+            productsList.Add(product);
+            RefreshList();
         }
     }
 }

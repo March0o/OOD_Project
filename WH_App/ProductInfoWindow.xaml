@@ -8,7 +8,7 @@
         Title="ProductInfoWindow" Height="450" Width="800"
         ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
         Background="#1B1B1E"
-        >
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
@@ -34,7 +34,6 @@
         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color1}" Margin="200,10,200,10" CornerRadius="5">
             <TextBlock x:Name="tblkName" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Product Name" VerticalAlignment="Center" FontSize="22" Foreground="{StaticResource Color6}"/>
         </Border>
-
         <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color1}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
             <TextBlock Text="Product Information" Foreground="{StaticResource Color6}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"/>
         </Border>
