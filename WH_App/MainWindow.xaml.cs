@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -92,6 +94,13 @@ namespace WH_App
         private void tbxSearch_GotFocus(object sender, RoutedEventArgs e)
         {
             tbxSearch.Text = "";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddProductWindow window = new AddProductWindow(db);
+            this.Close();
+            window.Show();
         }
     }
 }
