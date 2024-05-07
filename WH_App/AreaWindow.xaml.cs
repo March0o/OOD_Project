@@ -57,7 +57,7 @@ namespace WH_App
 
 
                 if (stockpileQuery.Count() == 0) // If No Stockpile
-                { tblkStockpileId.Text = "No Stockpile Assigned"; lbxProducts.ItemsSource = new List<String>() { "N/A" }; }
+                { tblkStockpileId.Text = "No Stockpile Assigned"; lbxProducts.ItemsSource = null; }
                 else // If Stockpile Assigned
                 {
                     //  Assign textblock info
@@ -90,19 +90,31 @@ namespace WH_App
             {
                 //  Get internal values
                 Section selectedSection = lbxSections.SelectedItem as Section;
-                int newId = (int)cbxMoveTo.SelectedItem;
-
-                //  get current stockpile
-                var stockpileQuery = from sp in db.Stockpiles
-                                     where sp.section_id == selectedSection.id
-                                     select sp;
-
-                //  assign stockpile to new section
-                Stockpile stockpile = stockpileQuery.FirstOrDefault();
-                stockpile.section_id = newId;
-                db.SaveChanges();
-
-                UpdateOccupiedSections();
+                if (cbxMoveTo.SelectedItem != null)
+                {
+                    int newId = (int)cbxMoveTo.SelectedItem;
+                    //  get current stockpile
+                    var stockpileQuery = from sp in db.Stockpiles
+                                         where sp.section_id == selectedSection.id
+                                         select sp;
+                    Stockpile stockpile = stockpileQuery.FirstOrDefault();
+                    if (stockpile != null)
+                    {
+                        //  assign stockpile to new section
+                        stockpile.section_id = newId;
+                        db.SaveChanges();
+                        UpdateOccupiedSections();
+                        RefreshListBox();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select a Valid Section");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a Section to transfer to");
+                }
             }
         }
 
@@ -157,15 +169,23 @@ namespace WH_App
                                      where sp.section_id == selectedSection.id
                                      select sp;
                 Stockpile spToDelete = stockpileQuery.FirstOrDefault();
-                //  Get products to delete
-                var productsQuery = from p in db.ProductQuantities
-                                    where p.owning_stockpile == spToDelete.id
-                                    select p;
-                //  Start changes on database
-                db.Stockpiles.Remove(spToDelete);
-                db.ProductQuantities.RemoveRange(productsQuery);
-                db.SaveChanges();
-                UpdateOccupiedSections();
+                if (spToDelete != null)
+                {
+                    //  Get products to delete
+                    var productsQuery = from p in db.ProductQuantities
+                                        where p.owning_stockpile == spToDelete.id
+                                        select p;
+                    //  Start changes on database
+                    db.Stockpiles.Remove(spToDelete);
+                    db.ProductQuantities.RemoveRange(productsQuery);
+                    db.SaveChanges();
+                    UpdateOccupiedSections();
+                    RefreshListBox();
+                }
+                else
+                {
+                    MessageBox.Show("Nothing to Delete");
+                }
             }
         }
 
@@ -209,6 +229,28 @@ namespace WH_App
                     infoWindow.Show();
                 }
             }
+        }
+
+        public void RefreshListBox()
+        {
+            // Assuming lbxSections is your ListBox
+            // Store the currently selected item
+            var selectedItem = lbxSections.SelectedItem;
+
+            // Temporarily set the selected item to null
+            lbxSections.SelectedItem = null;
+
+            // Set the selected item back to the original value
+            lbxSections.SelectedItem = selectedItem;
+
+            // Create a new SelectionChangedEventArgs object
+            var args = new SelectionChangedEventArgs(
+                ListBox.SelectionChangedEvent,
+                new List<object>() { selectedItem }, // Newly selected items
+                new List<object>()); // Items being unselected
+
+            // Raise the SelectionChanged event with the new arguments
+            lbxSections.RaiseEvent(args);
         }
     }
 }

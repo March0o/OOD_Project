@@ -42,19 +42,35 @@ namespace WH_App
             List<ProductInfo> productList = productQuery.ToList();
             cbxProductToAdd.ItemsSource = null;
             cbxProductToAdd.ItemsSource = productList;
+            cbxProductToAdd.SelectedIndex = 0;
             this.areaId = areaId;
         }
 
         private void btnProductAdd_Click(object sender, RoutedEventArgs e)
         {
             //  Get input Values
-            int quantity = int.Parse(tbxProductQty.Text);
-            int productId = (int)cbxProductToAdd.SelectedValue;
-            DateTime dateTime = (DateTime)dpExpiryDate.SelectedDate;
-            //  Create Product & add to list
-            ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = quantity, expiry_date = dateTime };
-            productsList.Add(product);
-            RefreshList();
+            int quantity;
+            if (int.TryParse(tbxProductQty.Text, out quantity))
+            {
+                int productId = (int)cbxProductToAdd.SelectedValue;
+                DateTime dateTime;
+                if (DateTime.TryParse(dpExpiryDate.SelectedDate.ToString(), out dateTime))
+                {
+                    //  Create Product & add to list
+                    ProductQuantity product = new ProductQuantity() { product_id = productId, quantity = quantity, expiry_date = dateTime };
+                    productsList.Add(product);
+                    RefreshList();
+                }
+                else
+                {
+                    MessageBox.Show("Please Select a Date");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Quantity Input Invalid");
+            }
+
         }
 
         public void RefreshList()
@@ -79,30 +95,37 @@ namespace WH_App
 
         private void btnAddStockpile_Click(object sender, RoutedEventArgs e)
         {
-            // Insert placeholder object for id
-            Stockpile placeholderStockpile = new Stockpile();
-            db.Stockpiles.AddOrUpdate(placeholderStockpile);
-            db.SaveChanges();
-            int newId = placeholderStockpile.id;
-
-            //  Assign Id to product list items
-            foreach (ProductQuantity product in productsList)
+            if (productsList.Count() == 0)
             {
-                product.owning_stockpile = newId;
+                // Insert placeholder object for id
+                Stockpile placeholderStockpile = new Stockpile();
+                db.Stockpiles.AddOrUpdate(placeholderStockpile);
+                db.SaveChanges();
+                int newId = placeholderStockpile.id;
+
+                //  Assign Id to product list items
+                foreach (ProductQuantity product in productsList)
+                {
+                    product.owning_stockpile = newId;
+                }
+                //  Create full Stockpile
+                Stockpile updatedStockpile = new Stockpile() { id = newId, section_id = sectionId };
+                updatedStockpile.products = productsList;
+
+                //  Update Database
+                db.Stockpiles.AddOrUpdate(updatedStockpile);
+                db.ProductQuantities.AddRange(productsList);
+                db.SaveChanges();
+
+                //  Close Current Window & Open new one
+                AreaWindow window = new AreaWindow(db, areaId);
+                this.Close();
+                window.Show();
             }
-            //  Create full Stockpile
-            Stockpile updatedStockpile = new Stockpile() {id = newId, section_id = sectionId};
-            updatedStockpile.products = productsList;
-
-            //  Update Database
-            db.Stockpiles.AddOrUpdate(updatedStockpile);
-            db.ProductQuantities.AddRange(productsList);
-            db.SaveChanges();
-
-            //  Close Current Window & Open new one
-            AreaWindow window = new AreaWindow(db,areaId);
-            this.Close();
-            window.Show();
+           else
+            {
+                MessageBox.Show("List is Empty");
+            }
         }
 
         private void tbxProductQty_GotFocus(object sender, RoutedEventArgs e)
