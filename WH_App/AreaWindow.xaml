@@ -53,7 +53,7 @@
                     <ColumnDefinition Width="3*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding id}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="0" Text="{Binding product_id}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="1" Text="{Binding quantity}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="2" Text="{Binding expiry_date}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Border  Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="3">

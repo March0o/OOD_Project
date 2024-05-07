@@ -5,15 +5,161 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WH_App"
         mc:Ignorable="d"
-        Title="AddStockpileWindow" Height="450" Width="800">
+        Title="AddStockpileWindow" Height="450" Width="800"
+        ResizeMode="NoResize" FontFamily="Lucida Sans Unicode"
+        Background="#1B1B1E"
+        >
+
+    <Window.Resources>
+        <SolidColorBrush  x:Key="Color1" Color="#313E50"/>
+        <SolidColorBrush  x:Key="Color2" Color="#3A435E"/>
+        <SolidColorBrush  x:Key="Color3" Color="#455561"/>
+        <SolidColorBrush  x:Key="Color4" Color="#5C6672"/>
+        <SolidColorBrush  x:Key="Color5" Color="#6C657F"/>
+        <SolidColorBrush  x:Key="Color6" Color="#A9BCD0"/>
+        <SolidColorBrush  x:Key="Color7" Color="#D8DBE2"/>
+
+        <Style x:Key="btnStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Color6}"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Color4}"/>
+        </Style>
+        <Style x:Key="lbxProductsStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="{StaticResource Color3}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style x:Key="tblkExpiry" TargetType="TextBlock">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding is_expired}" Value="True">
+                    <Setter Property="Background" Value="red"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding is_expired}" Value="False">
+                    <Setter Property="Background" Value="green"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <DataTemplate x:Key="ProductsTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding product_id}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Column="1" Text="{Binding quantity}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
+                <TextBlock Grid.Column="2" Text="{Binding expiry_date}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12"/>
+                <Border  Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="3">
+                    <TextBlock Style="{StaticResource tblkExpiry}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" FontSize="12"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <ListBox x:Name="lbxProducts" HorizontalAlignment="Left" Height="246" Margin="437,66,0,0" VerticalAlignment="Top" Width="324" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-        <ComboBox x:Name="cbxProductToAdd" HorizontalAlignment="Left" Height="33" Margin="44,145,0,0" VerticalAlignment="Top" Width="100" SelectedValuePath="id"/>
-        <TextBox x:Name="tbxProductQty" HorizontalAlignment="Left" Height="33" Margin="149,145,0,0" TextWrapping="Wrap" Text="Quantity" VerticalAlignment="Top" Width="57" GotFocus="tbxProductQty_GotFocus"/>
-        <Button x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Left" Height="33" Margin="336,145,0,0" VerticalAlignment="Top" Width="59" Click="btnProductAdd_Click"/>
-        <Button x:Name="btnRemoveProduct" Content="Remove" HorizontalAlignment="Left" Height="28" Margin="44,190,0,0" VerticalAlignment="Top" Width="351" Click="btnRemoveProduct_Click"/>
-        <Button x:Name="btnAddStockpile" Content="Add Stockpile" HorizontalAlignment="Left" Height="34" Margin="437,330,0,0" VerticalAlignment="Top" Width="324" Click="btnAddStockpile_Click"/>
-        <DatePicker x:Name="dpExpiryDate" HorizontalAlignment="Left" Height="33" Margin="211,145,0,0" VerticalAlignment="Top" Width="120"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0" Background="{StaticResource Color1}" Margin="20,20,20,0" CornerRadius="5,5,0,0">
+            <TextBlock Text="Stockpile Edits" Foreground="{StaticResource Color6}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        </Border>
+        <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource Color2}" Margin="20,0,20,20" CornerRadius="0,0,5,5" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color3}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+                    <TextBlock Text="Product" Foreground="{StaticResource Color7}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color4}" Margin="10,0,10,10" CornerRadius="0,0,5,5">
+                    <ComboBox x:Name="cbxProductToAdd" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" SelectedValuePath="id"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color3}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+                    <TextBlock Text="Expiry Date" Foreground="{StaticResource Color7}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color4}" Margin="10,0,10,10" CornerRadius="0,0,5,5">
+                    <DatePicker x:Name="dpExpiryDate" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200"/>
+                </Border>
+                <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color3}" Margin="10,10,10,0" CornerRadius="5,5,0,0">
+                    <TextBlock Text="Quantity" Foreground="{StaticResource Color7}" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Background="{StaticResource Color4}" Margin="10,00,10,10" CornerRadius="0,0,5,5">
+                    <TextBox x:Name="tbxProductQty" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Enter Quantity" VerticalAlignment="Center" GotFocus="tbxProductQty_GotFocus" Width="200"/>
+                </Border>
+                <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" x:Name="btnProductAdd" Content="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Click="btnProductAdd_Click" Style="{StaticResource btnStyle}"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="0" Background="{StaticResource Color1}" Margin="20,20,20,0" CornerRadius="5,5,0,0">
+            <TextBlock Text="Current Products" FontSize="18" Foreground="{StaticResource Color6}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Background="{StaticResource Color2}" CornerRadius="0,0,5,5" Margin="20,0,20,20" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="lbxProducts" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,10" ItemTemplate="{StaticResource ProductsTemplate}" Style="{StaticResource lbxProductsStyle}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Foreground" Value="{StaticResource Color7}"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="border2"
+                                                    Background="{StaticResource Color4}"
+                                                    BorderThickness="3"
+                                                    BorderBrush="{StaticResource Color3}"
+                                                    Padding="10,0,0,0"
+                                                    >
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="border2" Property="Background" Value="{StaticResource Color6}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+                <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Background="{StaticResource Color3}" Padding="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" x:Name="btnRemoveProduct" Content="Remove Product" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnRemoveProduct_Click" Style="{StaticResource btnStyle}"/>
+                        <Button Grid.Column="1" x:Name="btnAddStockpile" Content="Add Stockpile" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnAddStockpile_Click" Style="{StaticResource btnStyle}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
 
     </Grid>
 </Window>
