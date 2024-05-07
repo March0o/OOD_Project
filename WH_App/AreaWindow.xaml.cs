@@ -233,23 +233,16 @@ namespace WH_App
 
         public void RefreshListBox()
         {
-            // Assuming lbxSections is your ListBox
-            // Store the currently selected item
+            // Reselect Items
             var selectedItem = lbxSections.SelectedItem;
-
-            // Temporarily set the selected item to null
             lbxSections.SelectedItem = null;
-
-            // Set the selected item back to the original value
             lbxSections.SelectedItem = selectedItem;
-
-            // Create a new SelectionChangedEventArgs object
+            //  Create Items
             var args = new SelectionChangedEventArgs(
                 ListBox.SelectionChangedEvent,
-                new List<object>() { selectedItem }, // Newly selected items
-                new List<object>()); // Items being unselected
-
-            // Raise the SelectionChanged event with the new arguments
+                new List<object>() { selectedItem },
+                new List<object>()); 
+            //  Call Selection Changed Event Again
             lbxSections.RaiseEvent(args);
         }
 

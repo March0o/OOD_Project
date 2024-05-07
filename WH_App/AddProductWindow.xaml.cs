@@ -38,13 +38,14 @@ namespace WH_App
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
+            //  Get Input Values
             string productName = tbxName.Text;
             string productDescription = tbxDescription.Text;
-
+            //  Add Products to Database
             ProductInfo newProduct = new ProductInfo() { name = productName, description = productDescription, image="/Images/" + imageName};
             db.ProductInfos.AddOrUpdate(newProduct);
             db.SaveChanges();
-
+            //  Change Windows
             MainWindow window = new MainWindow();
             this.Close();
             window.Show();
@@ -59,40 +60,24 @@ namespace WH_App
 
         private void addImage_Click(object sender, RoutedEventArgs e)
         {
+            //  Open File Dialop
             OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            // Set properties of the OpenFileDialog
             openFileDialog.Title = "Select a PNG file to download";
-            openFileDialog.Filter = "PNG Files (*.png)|*.png"; // Allow only PNG files
+            openFileDialog.Filter = "PNG Files (*.png)|*.png";
 
-            // Show the OpenFileDialog and check if the user clicked OK
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true) // if ok
             {
-                // Get the selected file name and path
+                //  Get Directories
                 string selectedFileName = openFileDialog.FileName;
-
-                // Get the base directory of the application
                 string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-
-                // Navigate two levels up from the base directory to get the solution directory
                 string solutionDirectory = Directory.GetParent(Directory.GetParent(Directory.GetParent(baseDirectory).FullName).FullName).FullName;
-
-                // Define the destination folder relative to the solution directory
-                string destinationFolder = System.IO.Path.Combine(solutionDirectory, "Images"); // Change "Images" to your desired relative destination folder
-
-                // Construct the destination file path
+                string destinationFolder = System.IO.Path.Combine(solutionDirectory, "Images");
                 string destinationFilePath = System.IO.Path.Combine(destinationFolder, System.IO.Path.GetFileName(selectedFileName));
-
-                // Create the destination folder if it doesn't exist
+                //  Move to Images Folder
                 Directory.CreateDirectory(destinationFolder);
-
-                // Copy the selected file to the destination folder
-                File.Copy(selectedFileName, destinationFilePath, true); // "true" to overwrite if the file already exists
-
-                // Get the full path of the downloaded file
+                File.Copy(selectedFileName, destinationFilePath, true);
                 string fullPath = System.IO.Path.GetFullPath(destinationFilePath);
-
-                // Show a message to indicate that the file was downloaded
+                //  Change Display Image & Variable
                 imageName = System.IO.Path.GetFileName(selectedFileName);
                 imgDisplay.Source = new BitmapImage(new Uri("/Images/" + imageName,UriKind.Relative));
                 MessageBox.Show($"Download of {imageName} Complete, Remember to Include in Folder");

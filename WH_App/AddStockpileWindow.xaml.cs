@@ -150,7 +150,7 @@ namespace WH_App
             var productQuery = from pi in db.ProductInfos
                                select pi.id;
             List<int> productIdList = productQuery.ToList();
-            int randomProductIndex = rnd.Next(productIdList.Count - 1);
+            int randomProductIndex = rnd.Next(productIdList.Count);
             int productId = productIdList[randomProductIndex];
             //  Quantity
             int productQuantity = rnd.Next(1000);
